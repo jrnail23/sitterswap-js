@@ -1,0 +1,47 @@
+{
+  "name": "sitterswap-js",
+  "version": "1.0.0",
+  "description": "learning junk",
+  "main": "index.js",
+  "dependencies": {
+    "babel": "^5.8.26",
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.3",
+    "history": "^1.13.1",
+    "react": "^0.14.2",
+    "react-router": "^1.0.0"
+  },
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "beefy": "^2.1.5",
+    "browserify": "^12.0.1",
+    "npm-css": "^0.2.3",
+    "watchify": "^3.6.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "babel-node server.js",
+    "build-css": "npm-css ./css/index.css -o ./css/bundle.css",
+    "client": "npm run build-css && beefy client/main.js --index index.html --live"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrnail23/sitterswap-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrnail23/sitterswap-js/issues"
+  },
+  "homepage": "https://github.com/jrnail23/sitterswap-js#readme",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "stage": 0
+        }
+      ]
+    ]
+  }
+}
