@@ -1,15 +1,14 @@
 import React from 'react'
-import Link from 'react-router'
+import {Link} from 'react-router'
 
-var NotFoundPage = React.createClass({
-  render: function () {
+export default class extends React.Component {
+  render () {
     return (
       <div>
         <h1>Page Not Found</h1>
         <p>This is not the page you&apos;re looking for.</p>
+        <p><Link to='/'>Back to Home</Link></p>
       </div>
     )
   }
-})
-
-module.exports = NotFoundPage
+}

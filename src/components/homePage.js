@@ -1,7 +1,7 @@
 import React from 'react'
 
-var Home = React.createClass({
-  render: function () {
+export default class extends React.Component {
+  render () {
     return (
       <div className='jumbotron'>
         <h1>SitterSwap</h1>
@@ -9,6 +9,4 @@ var Home = React.createClass({
       </div>
     )
   }
-})
-
-module.exports = Home
+}
