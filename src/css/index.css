@@ -1,6 +1,6 @@
 /* sitterswap.css */
 @import "bootstrap";
 
-body {
-  background-color: silver;
+.dev {
+  background-color: rgb(255, 193, 193);
 }
