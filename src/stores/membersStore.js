@@ -16,8 +16,8 @@ let methods = {
 }
 
 let handlers = {
-  [ActionTypes.INITIALIZE]: action => { _members = action.initialData.members },
-  [ActionTypes.ADD_MEMBER]: action => { _members.push(action.member) }
+  [ActionTypes.RECEIVE_ALL_MEMBERS]: action => _members = action.members,
+  [ActionTypes.RECEIVE_MEMBER]: action => { _members.push(action.member) }
 }
 
 export default makeStore(methods, handlers, Dispatcher)

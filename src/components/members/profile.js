@@ -7,6 +7,14 @@ const getStateFromStore = (key) => {
   }
 }
 
+class Loader extends React.Component {
+  render () {
+    return (<blink>
+      LOADING...
+    </blink>)
+  }
+}
+
 export default class MemberProfilePage extends React.Component {
   static propTypes = {
     params: React.PropTypes.shape({
@@ -36,13 +44,25 @@ export default class MemberProfilePage extends React.Component {
     this.setState(getStateFromStore(key))
   }
 
+  renderMember (member) {
+    return (
+      <div>
+        <h1>Member Profile</h1>
+        <h2>{member.firstName + ' ' + member.lastName}</h2>
+        <div className='dev'>(member profile goes here)
+          <div>NOTE: change this to call the API</div>
+        </div>
+      </div>
+    )
+  }
+
   render () {
     var member = this.state.member
     return (
         <div>
-          <h1>Member Profile</h1>
-          <h2>{member.firstName + ' ' + member.lastName}</h2>
-          <div className='dev'>(member profile goes here)</div>
+          {
+            member ? this.renderMember(member) : <Loader />
+          }
         </div>
       )
   }

@@ -1,6 +1,7 @@
 import keyMirror from 'keymirror'
 
 export default keyMirror({
-  INITIALIZE: null,
-  ADD_MEMBER: null
+  ADD_MEMBER: null,
+  RECEIVE_ALL_MEMBERS: null,
+  RECEIVE_MEMBER: null
 })
