@@ -4,9 +4,8 @@ import {saveMember} from '../api/membersApi'
 
 export const addMember = (member) => {
   var newMember = saveMember(member)
-  console.log('in addMember action')
   Dispatcher.dispatch({
-    actionType: ActionTypes.ADD_MEMBER,
+    type: ActionTypes.ADD_MEMBER,
     member: newMember
   })
 }

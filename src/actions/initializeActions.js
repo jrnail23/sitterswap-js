@@ -5,7 +5,7 @@ import {getAllMembers} from '../api/membersApi'
 export default class InitializeActions {
   static initApp () {
     Dispatcher.dispatch({
-      actionType: ActionTypes.INITIALIZE,
+      type: ActionTypes.INITIALIZE,
       initialData: {
         members: getAllMembers()
       }
