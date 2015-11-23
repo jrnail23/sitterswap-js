@@ -2,26 +2,31 @@ import React from 'react'
 import {Link} from 'react-router'
 
 class MemberRow extends React.Component {
+  static propTypes = {
+    member: React.PropTypes.shape({
+      key: React.PropTypes.string.isRequired,
+      firstName: React.PropTypes.string.isRequired,
+      lastName: React.PropTypes.string.isRequired,
+      emailAddress: React.PropTypes.string.isRequired
+    })
+  }
+
   render () {
     var member = this.props.member
     return (
       <tr>
-        <td><Link to={`/members/${member.key}`}>{member.listName}</Link></td>
+        <td><Link to={`/members/${member.key}`}>{member.lastName + ', ' + member.firstName}</Link></td>
         <td><a href='mailto:{member.emailAddress}'>{member.emailAddress}</a></td>
       </tr>
     )
   }
 }
 
-MemberRow.propTypes = {
-  member: React.PropTypes.shape({
-    key: React.PropTypes.string,
-    listName: React.PropTypes.string,
-    emailAddress: React.PropTypes.string
-  })
-}
-
 export default class MembersTable extends React.Component {
+  static propTypes = {
+    members: React.PropTypes.array
+  }
+
   render () {
     return (
       <div>
@@ -32,7 +37,7 @@ export default class MembersTable extends React.Component {
               <th>Email</th>
             </tr>
           </thead>
-          <tbody className='dev'>
+          <tbody>
             {this.props.members.map(function (member) {
               return <MemberRow key={member.key} member={member} />
             })}
@@ -41,8 +46,4 @@ export default class MembersTable extends React.Component {
       </div>
     )
   }
-}
-
-MembersTable.propTypes = {
-  members: React.PropTypes.array
 }

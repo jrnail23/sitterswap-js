@@ -4,3 +4,11 @@
 .dev {
   background-color: rgb(255, 193, 193);
 }
+
+.navbar-brand {
+  height: 80px;
+}
+
+.navbar-brand img {
+  max-height: 80px;
+}

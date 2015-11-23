@@ -2,6 +2,10 @@ import React from 'react'
 import Header from './common/header'
 
 export default class App extends React.Component {
+  static propTypes = {
+    children: React.PropTypes.node
+  }
+
   render () {
     return (
       <div>
@@ -12,8 +16,4 @@ export default class App extends React.Component {
       </div>
     )
   }
-}
-
-App.propTypes = {
-  children: React.PropTypes.node
 }

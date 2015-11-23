@@ -6,14 +6,18 @@
   "dependencies": {
     "babel": "^5.8.26",
     "bootstrap": "^3.3.5",
+    "events": "^1.1.0",
     "express": "^4.13.3",
+    "flux": "^2.1.1",
     "history": "^1.13.1",
+    "keymirror": "^0.1.1",
+    "lodash": "^3.10.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
-    "react-router": "^1.0.0",
-    "toastr": "^2.1.2"
+    "react-router": "^1.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^4.1.5",
     "babelify": "^6.4.0",
     "browserify": "^12.0.1",
     "gulp": "^3.9.0",
@@ -39,6 +43,12 @@
     "url": "https://github.com/jrnail23/sitterswap-js/issues"
   },
   "homepage": "https://github.com/jrnail23/sitterswap-js#readme",
+  "babel": {
+    "stage": 0
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "browserify": {
     "transform": [
       [

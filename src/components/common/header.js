@@ -7,7 +7,7 @@ export default class extends React.Component {
       <nav className='navbar navbar-default'>
         <div className='container-fluid'>
           <IndexLink to='/' className='navbar-brand'>
-            <img src='https://www.npmjs.com/static/images/npm-logo.svg' style={{height: '49px', width: '80px'}} />
+            <img src='images/TakomaRooster.png' style={{maxWidth: '150px', marginTop: '-10px'}} />
           </IndexLink>
           <ul className='nav navbar-nav'>
             <li><IndexLink to='/'>Home</IndexLink></li>
