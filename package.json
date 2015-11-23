@@ -4,6 +4,7 @@
   "description": "learning junk",
   "main": "index.js",
   "dependencies": {
+    "@lanetix/make-store": "^1.0.3",
     "babel": "^5.8.26",
     "bootstrap": "^3.3.5",
     "events": "^1.1.0",
