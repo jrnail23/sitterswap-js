@@ -6,75 +6,75 @@ var source = require('vinyl-source-stream')
 var concat = require('gulp-concat')
 var standard = require('gulp-standard')
 
-var config = {
+var clientConfig = {
   port: 9005,
   devBaseUrl: 'http://localhost',
   paths: {
-    html: './src/*.html',
-    js: './src/**/*.js',
-    images: './src/images/*',
+    html: 'client/*.html',
+    js: 'client/**/*.js',
+    images: 'client/images/*',
     css: [
-      './node_modules/bootstrap/dist/css/bootstrap.min.css',
-      './node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
-      './node_modules/toastr/toastr.scss',
-      './src/css/index.css'
+      'node_modules/bootstrap/dist/css/bootstrap.min.css',
+      'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+      'client/css/index.css'
     ],
-    dist: './dist',
-    mainJs: './src/main.js'
+    dist: 'dist/client',
+    entryPoint: 'client/main.js'
   }
 }
 
 gulp.task('connect', function () {
   connect.server({
-    root: ['dist'],
-    port: config.port,
-    base: config.devBaseUrl,
+    root: [clientConfig.paths.dist],
+    port: clientConfig.port,
+    base: clientConfig.devBaseUrl,
     livereload: true
   })
 })
 
 gulp.task('open', ['connect'], function () {
-  gulp.src('dist/index.html')
-      .pipe(open({uri: config.devBaseUrl + ':' + config.port + '/'}))
+  gulp.src(__filename)
+    .pipe(open({uri: clientConfig.devBaseUrl + ':' + clientConfig.port + '/'}))
 })
 
 gulp.task('html', function () {
-  gulp.src(config.paths.html)
-      .pipe(gulp.dest(config.paths.dist))
-      .pipe(connect.reload())
+  gulp.src(clientConfig.paths.html)
+    .pipe(gulp.dest(clientConfig.paths.dist))
+    .pipe(connect.reload())
 })
 
 gulp.task('js', function () {
-  browserify(config.paths.mainJs)
+  browserify(clientConfig.paths.entryPoint)
     .bundle()
     .on('error', console.error.bind(console))
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest(config.paths.dist + '/scripts'))
+    .pipe(gulp.dest(clientConfig.paths.dist + '/scripts'))
     .pipe(connect.reload())
 })
 
 gulp.task('css', function () {
-  gulp.src(config.paths.css)
-      .pipe(concat('bundle.css'))
-      .pipe(gulp.dest(config.paths.dist + '/css'))
+  gulp.src(clientConfig.paths.css)
+    .pipe(concat('bundle.css'))
+    .pipe(gulp.dest(clientConfig.paths.dist + '/css'))
 })
 
 gulp.task('images', function () {
-  gulp.src(config.paths.images)
-      .pipe(gulp.dest(config.paths.dist + '/images'))
-      .pipe(connect.reload())
+  gulp.src(clientConfig.paths.images)
+    .pipe(gulp.dest(clientConfig.paths.dist + '/images'))
+    .pipe(connect.reload())
 })
 
 gulp.task('lint', function () {
-  return gulp.src(config.paths.js)
-             .pipe(standard())
-             .pipe(standard.reporter('default'))
+  return gulp.src(clientConfig.paths.js)
+    .pipe(standard())
+    .pipe(standard.reporter('default'))
 })
 
 gulp.task('watch', function () {
-  gulp.watch(config.paths.html, ['html'])
-  gulp.watch(config.paths.js, ['js'])
-  gulp.watch(config.paths.css, ['css'])
+  gulp.watch(clientConfig.paths.html, ['html'])
+  gulp.watch(clientConfig.paths.js, ['js'])
+  gulp.watch(clientConfig.paths.css, ['css'])
 })
 
-gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch'])
+gulp.task('default', ['html', 'js', 'css',
+  'images', 'lint', 'open', 'watch'])

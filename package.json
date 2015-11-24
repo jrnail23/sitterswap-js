@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@lanetix/make-store": "^1.0.3",
-    "babel": "^5.8.26",
     "bluebird": "^3.0.5",
+    "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
     "events": "^1.1.0",
     "express": "^4.13.3",
@@ -19,6 +19,7 @@
     "react-router": "^1.0.0"
   },
   "devDependencies": {
+    "babel": "^5.8.26",
     "babel-eslint": "^4.1.5",
     "babelify": "^6.4.0",
     "browserify": "^12.0.1",
@@ -31,9 +32,9 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "babel-node server.js",
-    "client": "gulp"
+    "start-server": "supervisor -w server -n error -x babel-node server/app",
+    "start-client": "gulp",
+    "start-all": "npm run start-server & npm run start-client"
   },
   "repository": {
     "type": "git",
