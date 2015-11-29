@@ -1,34 +1,47 @@
-import Bromise from 'bluebird'
-import _ from 'lodash'
-import members from './data/members'
+import { defaults } from 'lodash'
 import serverActions from '../actions/serverActions'
+import request from 'http-as-promised'
 
-var _clone = function (item) {
-  return JSON.parse(JSON.stringify(item))
+const baseUrl = 'http://localhost:9006/'
+
+const makeRequest = options => {
+  const defaultOptions = {
+    method: 'GET',
+    json: true,
+    resolve: 'body',
+    baseUrl: baseUrl
+  }
+
+  let userOptions = typeof (options) === 'string' ? {uri: options} : options
+  let opts = defaults(userOptions, defaultOptions)
+  return request(opts)
 }
 
 export const getAllMembers = () => {
-  return Bromise.resolve(_clone(members))
+  return makeRequest('/members')
     .tap(serverActions.receiveAllMembers)
 }
 
 export const getMemberByKey = (key) => {
-  const member = _.find(members, {key: key})
-  return Bromise.resolve(_clone(member))
+  return makeRequest('/members/' + key)
     .tap(serverActions.receiveMember)
 }
 
 export const saveMember = (member) => {
-  console.log('pretend this just saved the member to the DB via AJAX call...')
-
-  if (member.key) {
-    var existingMemberIndex = _.indexOf(members, _.find(members, {key: member.key}))
-    members.splice(existingMemberIndex, 1, member)
-  } else {
-    member.key = member.firstName.toLowerCase() + '-' + member.lastName.toLowerCase()
-    members.push(member)
-  }
-
-  return Bromise.resolve(_clone(member))
-    .tap(serverActions.receiveMember)
+  return makeRequest({
+    resolve: 'response',
+    method: 'POST',
+    uri: '/members',
+    body: member
+  })
+    .then(responseMsg => {
+      if (responseMsg.statusCode === 201) {
+        return makeRequest({
+          baseUrl: null,
+          uri: responseMsg.headers.location
+        })
+          .then(serverActions.receiveMember)
+      }
+      throw new Error('wtf happened? I only really expect HTTP 201 with a location header, but received HTTP ' + responseMsg.statusCode + '(' + responseMsg.statusMessage + ')')
+    })
 }
