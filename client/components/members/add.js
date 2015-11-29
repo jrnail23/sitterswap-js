@@ -15,7 +15,12 @@ export default class extends React.Component {
     bindAll(this, 'setMemberState', 'memberFormIsValid', 'saveMember')
 
     this.state = {
-      member: {key: '', firstName: '', lastName: '', emailAddress: ''},
+      member: {
+        key: '',
+        firstName: '',
+        lastName: '',
+        emailAddress: ''
+      },
       errors: {}
     }
   }

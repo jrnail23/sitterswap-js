@@ -7,7 +7,10 @@ export default class TextInput extends React.Component {
     label: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string,
-    value: React.PropTypes.string,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     error: React.PropTypes.string
   }
 

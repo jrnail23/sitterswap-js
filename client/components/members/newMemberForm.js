@@ -3,7 +3,11 @@ import Input from '../common/textInput'
 
 export default class NewMemberForm extends React.Component {
   static propTypes = {
-    member: React.PropTypes.object.isRequired,
+    member: React.PropTypes.shape({
+      firstName: React.PropTypes.string.isRequired,
+      lastName: React.PropTypes.string.isRequired,
+      emailAddress: React.PropTypes.string.isRequired
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSave: React.PropTypes.func.isRequired,
     errors: React.PropTypes.object
