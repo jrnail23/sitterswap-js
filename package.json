@@ -16,6 +16,8 @@
     "http-as-promised": "^1.1.0",
     "keymirror": "^0.1.1",
     "lodash": "^3.10.1",
+    "node-postgres-named": "^2.2.5",
+    "pg-connect": "^2.0.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",

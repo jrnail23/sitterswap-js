@@ -1,17 +1,13 @@
 import express from 'express'
 import cors from 'express-cors'
+import config from './config'
 import bodyParser from 'body-parser'
 import membersRouter from './routes/membersRouter'
 
-// (I obviously wouldn't hardcode this in a real app)
-const port = 9006
-
 const app = express()
 
-const corsOptions = {
-  allowedOrigins: ['localhost:*'],
-  headers: ['Content-Type', 'X-Requested-With', 'Location', 'ETag']
-}
+const corsOptions = config.corsOptions
+
 app.use(cors(corsOptions))
 app.use((req, res, next) => {
   res.set('Access-Control-Expose-Headers', corsOptions.headers.join(', '))
@@ -27,6 +23,6 @@ app.get('/', (req, res) => {
   res.json({members: '/members'})
 })
 
-app.listen(port, () => {
-  console.log('sitterswap API is running on PORT: ' + port)
+app.listen(config.port, () => {
+  console.log('sitterswap API is running on PORT: ' + config.port)
 })
