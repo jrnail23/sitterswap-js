@@ -11,7 +11,7 @@ var clientConfig = {
   devBaseUrl: 'http://localhost',
   paths: {
     html: 'src/client/*.html',
-    js: 'src/client/**/*.js',
+    js: 'src/client/js/**/*.js',
     images: 'src/client/images/*',
     css: [
       'node_modules/bootstrap/dist/css/bootstrap.min.css',
@@ -19,7 +19,7 @@ var clientConfig = {
       'src/client/css/index.css'
     ],
     dist: 'dist/client',
-    entryPoint: 'src/client/main.js'
+    entryPoint: 'src/client/js/main.js'
   }
 }
 
@@ -48,7 +48,7 @@ gulp.task('js', function () {
     .bundle()
     .on('error', console.error.bind(console))
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest(clientConfig.paths.dist + '/scripts'))
+    .pipe(gulp.dest(clientConfig.paths.dist + '/js'))
     .pipe(connect.reload())
 })
 
