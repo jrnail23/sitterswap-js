@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import MembersTable from './membersTable'
 import store from '../../stores/membersStore'
 
-const getStateFromStore = () => {
+const getStateFromStores = () => {
   return {
     members: store.getAllMembers()
   }
@@ -12,20 +12,20 @@ const getStateFromStore = () => {
 export default class extends React.Component {
   constructor (props) {
     super(props)
-    this.onStoreChanged = this::this.onStoreChanged
-    this.state = getStateFromStore()
+    this._onChange = this::this._onChange
+    this.state = getStateFromStores()
   }
 
   componentDidMount () {
-    store.addChangeListener(this.onStoreChanged)
+    store.addChangeListener(this._onChange)
   }
 
   componentWillUnmount () {
-    store.removeChangeListener(this.onStoreChanged)
+    store.removeChangeListener(this._onChange)
   }
 
-  onStoreChanged () {
-    this.setState(getStateFromStore())
+  _onChange () {
+    this.setState(getStateFromStores())
   }
 
   render () {

@@ -1,5 +1,5 @@
 import { defaults } from 'lodash'
-import serverActions from '../actions/serverActions'
+import {receiveMembers, receiveMember} from '../actions/membersServerActions'
 import request from 'http-as-promised'
 
 const baseUrl = 'http://localhost:9006/'
@@ -19,12 +19,12 @@ const makeRequest = options => {
 
 export const getAllMembers = () => {
   return makeRequest('/members')
-    .tap(serverActions.receiveAllMembers)
+    .tap(receiveMembers)
 }
 
 export const getMemberByKey = (key) => {
   return makeRequest('/members/' + key)
-    .tap(serverActions.receiveMember)
+    .tap(receiveMember)
 }
 
 export const saveMember = (member) => {
@@ -40,7 +40,7 @@ export const saveMember = (member) => {
           baseUrl: null,
           uri: responseMsg.headers.location
         })
-          .then(serverActions.receiveMember)
+          .then(receiveMember)
       }
       throw new Error('wtf happened? I only really expect HTTP 201 with a location header, but received HTTP ' + responseMsg.statusCode + '(' + responseMsg.statusMessage + ')')
     })

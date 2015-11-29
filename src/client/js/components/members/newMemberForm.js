@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from '../common/textInput'
+import {Link} from 'react-router'
 
 export default class NewMemberForm extends React.Component {
   static propTypes = {
@@ -33,9 +34,10 @@ export default class NewMemberForm extends React.Component {
             onChange={this.props.onChange}
             error={this.props.errors.emailAddress} />
 
+          <Link to='/members' className='btn btn-default'>Cancel</Link>
           <input type='submit'
             value='Save'
-            className='btn btn-default'
+            className='btn btn-primary'
             onClick={this.props.onSave} />
         </form>
       </div>
