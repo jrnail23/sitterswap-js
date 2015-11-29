@@ -10,16 +10,16 @@ var clientConfig = {
   port: 9005,
   devBaseUrl: 'http://localhost',
   paths: {
-    html: 'client/*.html',
-    js: 'client/**/*.js',
-    images: 'client/images/*',
+    html: 'src/client/*.html',
+    js: 'src/client/**/*.js',
+    images: 'src/client/images/*',
     css: [
       'node_modules/bootstrap/dist/css/bootstrap.min.css',
       'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
-      'client/css/index.css'
+      'src/client/css/index.css'
     ],
     dist: 'dist/client',
-    entryPoint: 'client/main.js'
+    entryPoint: 'src/client/main.js'
   }
 }
 

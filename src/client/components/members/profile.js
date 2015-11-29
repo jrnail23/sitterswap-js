@@ -1,5 +1,7 @@
 import React from 'react'
 import store from '../../stores/membersStore'
+import EmailLink from '../common/emailLink'
+import {Link} from 'react-router'
 
 const getStateFromStore = (key) => {
   return {
@@ -49,9 +51,19 @@ export default class MemberProfilePage extends React.Component {
       <div>
         <h1>Member Profile</h1>
         <h2>{member.firstName + ' ' + member.lastName}</h2>
-        <div className='dev'>(member profile goes here)
-          <div>NOTE: change this to call the API</div>
-        </div>
+        <section>
+          <h3>Contact Info</h3>
+          <dl>
+            <dt>Email Address</dt>
+            <dd><EmailLink emailAddress={member.emailAddress} /></dd>
+          </dl>
+        </section>
+        <section>
+          <h3>Tasks</h3>
+          <ul>
+            <li><Link to={`/members/${member.key}/sits/add`} className='dev'>Record a sit</Link></li>
+          </ul>
+        </section>
       </div>
     )
   }

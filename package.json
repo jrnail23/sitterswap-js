@@ -37,7 +37,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start-server": "supervisor -w server -x babel-node server/app",
+    "start-server": "supervisor -w src/server -x babel-node src/server/app",
     "start-client": "gulp",
     "start-all": "npm run start-server & npm run start-client"
   },

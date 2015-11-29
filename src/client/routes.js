@@ -8,10 +8,11 @@ import MemberProfilePage from './components/members/profile'
 import NotFoundPage from './components/not-found'
 
 const routes = (
-  <Route path='/' component={App}>
+<Route path='/' component={App}>
     <IndexRoute component={HomePage} />
     <Route path='members' component={MembersPage} />
     <Route path='members/add' component={AddMemberPage} />
+    <Route path='members/:key/sits/add' component={MemberProfilePage} />
     <Route path='members/:key' component={MemberProfilePage} />
     <Route path='*' component={NotFoundPage} />
   </Route>

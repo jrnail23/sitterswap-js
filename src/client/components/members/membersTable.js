@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
+import EmailLink from '../common/emailLink'
 
 class MemberRow extends React.Component {
   static propTypes = {
@@ -16,7 +17,7 @@ class MemberRow extends React.Component {
     return (
       <tr>
         <td><Link to={`/members/${member.key}`}>{member.lastName + ', ' + member.firstName}</Link></td>
-        <td><a href='mailto:{member.emailAddress}'>{member.emailAddress}</a></td>
+        <td><EmailLink emailAddress={member.emailAddress} /></td>
       </tr>
     )
   }
