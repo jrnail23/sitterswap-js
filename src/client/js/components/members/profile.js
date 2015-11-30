@@ -1,19 +1,14 @@
 import React from 'react'
-import store from '../../stores/membersStore'
+import membersStore from '../../stores/membersStore'
+import activitiesStore from '../../stores/activitiesStore'
 import EmailLink from '../common/emailLink'
-import {Link} from 'react-router'
+import Ledger from '../activities/memberLedger'
+import NotFoundPage from '../not-found'
 
-const getStateFromStore = (key) => {
+const getStateFromStores = (key) => {
   return {
-    member: store.getMemberByKey(key)
-  }
-}
-
-class Loader extends React.Component {
-  render () {
-    return (<blink>
-      LOADING...
-    </blink>)
+    member: membersStore.getMemberByKey(key),
+    ledgerItems: activitiesStore.getMemberActivities(key)
   }
 }
 
@@ -26,27 +21,34 @@ export default class MemberProfilePage extends React.Component {
 
   constructor (props, context) {
     super(props, context)
-
     this.onStoreChanged = this::this.onStoreChanged
-
-    const {key} = props.params
-    this.state = getStateFromStore(key)
+    this.state = getStateFromStores(props.params.key)
   }
 
   componentDidMount () {
-    store.addChangeListener(this.onStoreChanged)
+    membersStore.addChangeListener(this.onStoreChanged)
+    activitiesStore.addChangeListener(this.onStoreChanged)
   }
 
   componentWillUnmount () {
-    store.removeChangeListener(this.onStoreChanged)
+    membersStore.removeChangeListener(this.onStoreChanged)
+    activitiesStore.removeChangeListener(this.onStoreChanged)
   }
 
   onStoreChanged () {
-    const {key} = this.props.params
-    this.setState(getStateFromStore(key))
+    this.setState(getStateFromStores(this.props.params.key))
   }
 
-  renderMember (member) {
+  render () {
+    var member = this.state.member
+    var ledgerItems = this.state.ledgerItems
+
+    if (!member) {
+      return (
+        <NotFoundPage />
+      )
+    }
+
     return (
       <div>
         <h1>Member Profile</h1>
@@ -59,23 +61,15 @@ export default class MemberProfilePage extends React.Component {
           </dl>
         </section>
         <section>
-          <h3>Tasks</h3>
-          <ul>
-            <li><Link to={`/members/${member.key}/sits/add`} className='dev'>Record a sit</Link></li>
-          </ul>
+          <h3>Sits</h3>
+          <div>
+            <form className='dev'>
+              (form goes here)
+            </form>
+          </div>
+          <Ledger ledgerItems={ledgerItems} member={member} />
         </section>
       </div>
     )
-  }
-
-  render () {
-    var member = this.state.member
-    return (
-        <div>
-          {
-            member ? this.renderMember(member) : <Loader />
-          }
-        </div>
-      )
   }
 }

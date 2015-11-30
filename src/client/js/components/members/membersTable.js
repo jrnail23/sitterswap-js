@@ -31,7 +31,7 @@ export default class MembersTable extends React.Component {
   render () {
     return (
       <div>
-        <table className='table'>
+        <table className='table table-striped table-bordered table-condensed'>
           <thead>
             <tr>
               <th>Name</th>
