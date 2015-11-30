@@ -7,20 +7,24 @@ const _activities = new Map()
 
 const _addMemberActivities = (memberKey, activities) => {
   if (!_activities.has(memberKey)) {
-    _activities.set(memberKey, [])
+    _activities.set(memberKey, new Map())
   }
 
-  activities.forEach(activity => {
-    _activities.get(memberKey).push(activity)
-  })
+  activities
+    .map(activity => Object.assign(activity, {date: new Date(activity.date)}))
+    .forEach(activity => {
+      _activities.get(memberKey).set(activity.href, activity)
+    })
 }
 
 let methods = {
   getMemberActivities (memberKey) {
-    if (!_activities.has(memberKey)) {
+    var memberActivities = _activities.get(memberKey)
+    if (!memberActivities) {
       getMemberActivitiesApi(memberKey)
+      return []
     }
-    let activities = _activities.get(memberKey)
+    let activities = Array.from(memberActivities.values())
     return activities || []
   }
 }

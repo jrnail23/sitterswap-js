@@ -20,7 +20,7 @@ let methods = {
   },
 
   getMemberByKey (key) {
-    var member = _members.get(key)
+    let member = _members.get(key)
     if (!member) {
       console.log('membersStore.getMemberByKey(' + key + ') -- not in store, going to API')
       getMemberByKeyApi(key)

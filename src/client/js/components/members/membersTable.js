@@ -13,7 +13,7 @@ class MemberRow extends React.Component {
   }
 
   render () {
-    var member = this.props.member
+    const member = this.props.member
     return (
       <tr>
         <td><Link to={`/members/${member.key}`}>{member.lastName + ', ' + member.firstName}</Link></td>

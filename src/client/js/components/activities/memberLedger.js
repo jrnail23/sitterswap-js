@@ -36,7 +36,7 @@ export default class MemberLedger extends React.Component {
           </thead>
           <tbody>
             {this.props.ledgerItems.map(item => {
-              let rowModel = {
+              const rowModel = {
                 href: item.href,
                 date: item.date.toLocaleDateString(),
                 description: 'performed by ' + item.sitter,

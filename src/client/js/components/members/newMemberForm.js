@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '../common/textInput'
 import {Link} from 'react-router'
 
-export default class NewMemberForm extends React.Component {
+export default class extends React.Component {
   static propTypes = {
     member: React.PropTypes.shape({
       firstName: React.PropTypes.string.isRequired,

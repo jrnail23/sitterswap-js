@@ -4,6 +4,7 @@ import activitiesStore from '../../stores/activitiesStore'
 import EmailLink from '../common/emailLink'
 import Ledger from '../activities/memberLedger'
 import NotFoundPage from '../not-found'
+import {Link} from 'react-router'
 
 const getStateFromStores = (key) => {
   return {
@@ -12,7 +13,7 @@ const getStateFromStores = (key) => {
   }
 }
 
-export default class MemberProfilePage extends React.Component {
+export default class extends React.Component {
   static propTypes = {
     params: React.PropTypes.shape({
       key: React.PropTypes.string.isRequired
@@ -62,11 +63,7 @@ export default class MemberProfilePage extends React.Component {
         </section>
         <section>
           <h3>Sits</h3>
-          <div>
-            <form className='dev'>
-              (form goes here)
-            </form>
-          </div>
+          <Link to={`/members/${member.key}/sits/new`} className='btn btn-default'>Record a Sit</Link>
           <Ledger ledgerItems={ledgerItems} member={member} />
         </section>
       </div>

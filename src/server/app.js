@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'express-cors'
 import config from './config'
 import bodyParser from 'body-parser'
-import membersRouter from './routes/membersRouter'
+import membersRouter from './routes/members'
 
 const app = express()
 
