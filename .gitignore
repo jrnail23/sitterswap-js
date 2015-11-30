@@ -31,3 +31,5 @@ dist
 
 # IDE stuff
 .tern-project
+
+npm-debug.log.*

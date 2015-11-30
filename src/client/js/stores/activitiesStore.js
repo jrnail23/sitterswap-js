@@ -18,9 +18,10 @@ const _addMemberActivities = (memberKey, activities) => {
 let methods = {
   getMemberActivities (memberKey) {
     if (!_activities.has(memberKey)) {
-      return getMemberActivitiesApi(memberKey)
+      getMemberActivitiesApi(memberKey)
     }
-    return _activities.get(memberKey)
+    let activities = _activities.get(memberKey)
+    return activities || []
   }
 }
 

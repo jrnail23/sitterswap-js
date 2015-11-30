@@ -7,7 +7,6 @@ export default class extends React.Component {
   }
 
   render () {
-    let displayText = this.props.displayText ? this.props.displayText : this.props.emailAddress
-    return (<a href={'mailto:' + this.props.emailAddress}>{displayText}</a>)
+    return (<a href={'mailto:' + this.props.emailAddress}>{this.props.displayText || this.props.emailAddress}</a>)
   }
 }

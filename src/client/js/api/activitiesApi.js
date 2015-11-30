@@ -1,4 +1,4 @@
-import makeServerRequest from './utils/makeServerRequest'
+// import makeServerRequest from './utils/makeServerRequest'
 import Bromise from 'bluebird'
 import _ from 'lodash'
 import { receiveActivities, receiveActivity } from '../actions/activitiesServerActions'
