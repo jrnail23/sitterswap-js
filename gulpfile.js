@@ -56,6 +56,7 @@ gulp.task('css', function () {
   gulp.src(clientConfig.paths.css)
     .pipe(concat('bundle.css'))
     .pipe(gulp.dest(clientConfig.paths.dist + '/css'))
+    .pipe(connect.reload())
 })
 
 gulp.task('images', function () {
@@ -72,7 +73,7 @@ gulp.task('lint', function () {
 
 gulp.task('watch', function () {
   gulp.watch(clientConfig.paths.html, ['html'])
-  gulp.watch(clientConfig.paths.js, ['js'])
+  gulp.watch(clientConfig.paths.js, ['js', 'lint'])
   gulp.watch(clientConfig.paths.css, ['css'])
 })
 

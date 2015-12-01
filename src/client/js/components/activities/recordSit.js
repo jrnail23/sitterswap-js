@@ -18,6 +18,8 @@ export default class extends React.Component {
   constructor (props, context) {
     super(props, context)
 
+    // TODO: add property for memberName (get from store)
+
     bindAll(this, 'setSitState', 'sitFormIsValid', 'recordSit')
 
     this.state = {
@@ -30,10 +32,8 @@ export default class extends React.Component {
     }
   }
 
-  setSitState (event) {
-    var field = event.target.name
-    var value = event.target.value
-    this.state.sit[field] = value
+  setSitState ({target: {name, value}}) {
+    this.state.sit[name] = value
     return this.setState({sit: this.state.sit})
   }
 

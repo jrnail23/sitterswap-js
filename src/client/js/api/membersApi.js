@@ -26,6 +26,8 @@ export const saveMember = (member) => {
         })
           .then(receiveMember)
       }
+
+      // TODO: use Bluebird to reject, with typed error (see: make-error)
       throw new Error('wtf happened? I only really expect HTTP 201 with a location header, but received HTTP ' + responseMsg.statusCode + '(' + responseMsg.statusMessage + ')')
     })
 }

@@ -4,6 +4,7 @@ import getDbConnection from '../data'
 import url from 'url'
 
 const mapRowToMember = row => {
+  // TODO: use camelize to do this
   return {
     key: row.key,
     firstName: row.first_name,
@@ -28,7 +29,7 @@ export default () => {
 
   membersRouter.route('/')
     .get((req, res) => {
-      return Bromise.using(
+      Bromise.using(
         getDbConnection(),
         query => query('SELECT key, first_name, last_name, email_address FROM member')
       ).get('rows')
@@ -43,7 +44,7 @@ export default () => {
         emailAddress: req.body.emailAddress
       }
       var sql = 'INSERT INTO member (key, last_name, first_name, email_address) VALUES ($key, $lastName, $firstName, $emailAddress)'
-      return Bromise.using(getDbConnection(), query => query(sql, newMember))
+      Bromise.using(getDbConnection(), query => query(sql, newMember))
         .then(result => {
           var uri = {
             protocol: req.protocol,
@@ -56,6 +57,8 @@ export default () => {
               location: uri.pathname
             })
         })
+
+        // TODO: catch unique key violation, return appropriate HTTP status
     })
 
   const activitiesRouter = express.Router({mergeParams: true})
@@ -84,9 +87,10 @@ export default () => {
         date: req.body.date,
         points: req.body.points
       }
-      var sql = `SELECT insert_activity(client_key := $client, sitter_key := $sitter, date := $date, points := $points)`
+      var sql = `RETURNING insert_activity(client_key := $client, sitter_key := $sitter, date := $date, points := $points)`
       return Bromise.using(getDbConnection(), query => query(sql, newActivity))
         .get('rows')
+        .tap(response => console.log(response))
         .map(row => row['insert_activity'])
         .spread(id => {
           var uri = {
@@ -114,8 +118,7 @@ export default () => {
         query => query(sql, {memberKey: req.params.memberKey, id: req.params.id})
       ).get('rows')
         .map(mapRowToActivity)
-        .then(rows => {
-          const activity = rows[0]
+        .then(([activity]) => {
           if (!activity) {
             res.status(404).send('no activity for ' + req.params.memberKey + ' found with id: ' + req.params.id)
             return
@@ -130,8 +133,7 @@ export default () => {
       query => query('SELECT key, last_name, first_name, email_address FROM member WHERE key = $key ',
           {key: req.params.memberKey})
     ).get('rows')
-      .then(rows => {
-        const member = rows[0]
+      .then(([member]) => {
         if (!member) {
           res.status(404).send('no member found with key: ' + req.params.memberKey)
           return

@@ -8,7 +8,7 @@ import MemberProfilePage from './components/members/profile'
 import NotFoundPage from './components/not-found'
 import SitRecordingPage from './components/activities/recordSit'
 
-const routes = (
+export default (
 <Route path='/' component={App}>
     <IndexRoute component={HomePage} />
     <Route path='members' component={MembersPage} />
@@ -18,5 +18,3 @@ const routes = (
     <Route path='*' component={NotFoundPage} />
   </Route>
 )
-
-export default routes

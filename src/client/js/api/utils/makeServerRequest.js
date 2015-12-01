@@ -10,7 +10,7 @@ export default options => {
     baseUrl: config.serverBaseUrl
   }
 
-  let userOptions = typeof (options) === 'string' ? {uri: options} : options
-  let opts = defaults(userOptions, defaultOptions)
+  const userOptions = typeof (options) === 'string' ? {uri: options} : options
+  const opts = defaults(userOptions, defaultOptions)
   return request(opts)
 }

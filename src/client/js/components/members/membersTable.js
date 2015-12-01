@@ -39,7 +39,7 @@ export default class MembersTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.members.map(function (member) {
+            {this.props.members.map(member => {
               return <MemberRow key={member.key} member={member} />
             })}
           </tbody>
