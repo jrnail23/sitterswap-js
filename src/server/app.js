@@ -1,18 +1,15 @@
 import express from 'express'
-import cors from 'express-cors'
+import cors from 'cors'
 import config from './config'
 import bodyParser from 'body-parser'
 import membersRouter from './routes/members'
 
 const app = express()
 
-const corsOptions = config.corsOptions
-
-app.use(cors(corsOptions))
-app.use((req, res, next) => {
-  res.set('Access-Control-Expose-Headers', corsOptions.headers.join(', '))
-  next()
-})
+app.use(cors({
+  allowedHeaders: config.corsOptions.headers,
+  exposedHeaders: config.corsOptions.headers
+}))
 
 app.use(bodyParser.urlencoded({extended: 'true'}))
 app.use(bodyParser.json())

@@ -8,9 +8,9 @@
     "bluebird": "^3.0.5",
     "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
+    "cors": "^2.7.1",
     "events": "^1.1.0",
     "express": "^4.13.3",
-    "express-cors": "0.0.3",
     "flux": "^2.1.1",
     "history": "^1.13.1",
     "http-as-promised": "^1.1.0",
@@ -34,10 +34,15 @@
     "gulp-connect": "^2.2.0",
     "gulp-open": "^1.0.0",
     "gulp-standard": "^5.2.2",
+    "mocha": "^2.3.4",
+    "proxyquire": "^1.7.3",
     "reactify": "^1.1.1",
+    "should": "^7.1.1",
+    "sinon": "^1.17.2",
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
+    "mocha": "mocha",
     "start-server": "supervisor -w src/server -n error -x babel-node src/server/app",
     "start-client": "gulp",
     "start-all": "npm run start-server & npm run start-client"
@@ -56,7 +61,15 @@
     "stage": 0
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "should",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "expect"
+    ]
   },
   "browserify": {
     "transform": [

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import MembersTable from './membersTable'
-import store from '../../stores/membersStore'
+import store from '../../stores/members'
 
 const getStateFromStores = () => {
   return {

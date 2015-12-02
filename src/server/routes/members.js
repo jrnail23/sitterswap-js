@@ -87,7 +87,7 @@ export default () => {
         date: req.body.date,
         points: req.body.points
       }
-      var sql = `RETURNING insert_activity(client_key := $client, sitter_key := $sitter, date := $date, points := $points)`
+      var sql = `SELECT insert_activity(client_key := $client, sitter_key := $sitter, date := $date, points := $points)`
       return Bromise.using(getDbConnection(), query => query(sql, newActivity))
         .get('rows')
         .tap(response => console.log(response))

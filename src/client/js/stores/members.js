@@ -3,8 +3,6 @@ import makeStore from '@lanetix/make-store'
 import ActionTypes from '../constants/actionTypes'
 import { getMemberByKey as getMemberByKeyApi } from '../api/membersApi'
 
-// TODO: use Flux utils base stores here?
-
 const _members = new Map()
 
 const _addMembers = (members) => {
