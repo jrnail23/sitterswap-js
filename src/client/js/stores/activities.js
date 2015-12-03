@@ -2,19 +2,30 @@ import Dispatcher from '../dispatcher'
 import makeStore from '@lanetix/make-store'
 import ActionTypes from '../constants/actionTypes'
 import { getMemberActivities as getMemberActivitiesApi } from '../api/activitiesApi'
+import Immutable from 'immutable'
+import _ from 'lodash'
 
-const _activities = new Map()
+const Activity = Immutable.Record({
+  sitter: undefined,
+  date: undefined,
+  points: undefined,
+  client: undefined,
+  href: undefined
+})
 
-const _addMemberActivities = (memberKey, activities) => {
-  if (!_activities.has(memberKey)) {
-    _activities.set(memberKey, new Map())
-  }
+// Map<Key:Activity.client,Value:Map<Key:Activity.href,Value:Activity>>
+let _activities = Immutable.Map()
 
-  activities
+const _addMemberActivities = (activities) => {
+  let activityRecords = activities
     .map(activity => Object.assign(activity, {date: new Date(activity.date)}))
-    .forEach(activity => {
-      _activities.get(memberKey).set(activity.href, activity)
-    })
+    .map(activity => new Activity(activity))
+
+  let activitiesByClient = _.groupBy(activityRecords, a => a.client)
+  var finalMap = Immutable.Map(Object.keys(activitiesByClient)
+    .map(client => [client, Immutable.Map(activitiesByClient[client].map(a => [a.href, a]))]))
+
+  _activities = _activities.mergeDeep(finalMap)
 }
 
 let methods = {
