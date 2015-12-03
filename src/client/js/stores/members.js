@@ -2,19 +2,25 @@ import Dispatcher from '../dispatcher'
 import makeStore from '@lanetix/make-store'
 import ActionTypes from '../constants/actionTypes'
 import { getMemberByKey as getMemberByKeyApi } from '../api/membersApi'
+import Immutable from 'immutable'
 
-const _members = new Map()
+const Member = Immutable.Record({
+  key: undefined,
+  firstName: undefined,
+  lastName: undefined,
+  emailAddress: undefined
+})
+
+let _members = Immutable.Map()
 
 const _addMembers = (members) => {
-  members.forEach(member => {
-    // TODO: maybe use ETags or versions here to decide whether to update state? does it even matter?
-    _members.set(member.key, member)
-  })
+  const memberRecords = members.map(m => new Member({key: m.key, firstName: m.firstName, lastName: m.lastName, emailAddress: m.emailAddress}))
+  _members = _members.withMutations(map => memberRecords.forEach(m => map.set(m.key, m)))
 }
 
 let methods = {
   getAllMembers () {
-    return Array.from(_members.values())
+    return _members.toArray()
   },
 
   getMemberByKey (key) {
