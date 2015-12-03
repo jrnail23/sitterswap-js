@@ -41,8 +41,8 @@ let methods = {
 }
 
 let handlers = {
-  [ActionTypes.RECEIVE_ACTIVITIES]: action => _addMemberActivities(action.memberKey, action.activities),
-  [ActionTypes.RECEIVE_ACTIVITY]: action => _addMemberActivities(action.memberKey, [action.activity])
+  [ActionTypes.RECEIVE_ACTIVITIES]: action => _addMemberActivities(action.activities),
+  [ActionTypes.RECEIVE_ACTIVITY]: action => _addMemberActivities([action.activity])
 }
 
 export default makeStore(methods, handlers, Dispatcher)
