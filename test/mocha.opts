@@ -1,7 +1,0 @@
---recursive
---ui bdd
---reporter spec
---require should
---compilers js:babel/register
---watch
---check-leaks
