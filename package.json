@@ -1,5 +1,5 @@
 {
-  "name": "sitterswap-js",
+  "name": "sitterswap-ui",
   "version": "1.0.0",
   "description": "learning junk",
   "main": "index.js",
@@ -36,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jrnail23/sitterswap-js.git"
+    "url": "git+https://github.com/jrnail23/sitterswap-ui.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jrnail23/sitterswap-js/issues"
+    "url": "https://github.com/jrnail23/sitterswap-ui/issues"
   },
-  "homepage": "https://github.com/jrnail23/sitterswap-js#readme",
+  "homepage": "https://github.com/jrnail23/sitterswap-ui#readme",
   "babel": {
     "stage": 0
   },

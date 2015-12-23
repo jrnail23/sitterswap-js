@@ -1,1 +1,1 @@
-# sitterswap-js
+# sitterswap-ui
