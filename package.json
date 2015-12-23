@@ -6,19 +6,14 @@
   "dependencies": {
     "@lanetix/make-store": "^1.0.3",
     "bluebird": "^3.0.5",
-    "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
-    "cors": "^2.7.1",
     "events": "^1.1.0",
-    "express": "^4.13.3",
     "flux": "^2.1.1",
     "http-as-promised": "^1.1.0",
     "immutable": "^3.7.5",
     "keymirror": "^0.1.1",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
-    "node-postgres-named": "^2.2.5",
-    "pg-connect": "^2.0.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",
@@ -37,9 +32,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start-server": "supervisor -w src/server -n error -x babel-node src/server/app",
-    "start-client": "gulp",
-    "start": "npm run start-server & npm run start-client"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
